@@ -28,8 +28,8 @@ public class Controller {
     @FXML
     private Label amount;
 
-        BigDecimal valueOfAmount = BigDecimal.valueOf(0.00);
-        BigDecimal valueOfVat = BigDecimal.valueOf(0.00);
+    private BigDecimal valueOfAmount = BigDecimal.valueOf(0.00);
+    private BigDecimal valueOfVat = BigDecimal.valueOf(0.00);
 
     public  void initialize(){
         EntityManagerFactory emf = Persistence
@@ -46,12 +46,10 @@ public class Controller {
         addOrderButton.setOnAction(event -> {
                 addItemsToOrder();
                 addingPricesWithVat();
-        });
+            });
 
 
         entityManager.getTransaction().commit();
-
-
 
         entityManager.close();
         emf.close();
@@ -69,13 +67,10 @@ public class Controller {
     }
 
     private String showAmount() {
-
         yourItemList.getItems().forEach(item -> {
                 valueOfAmount = valueOfAmount.add(item.getPrice());
                 valueOfVat = valueOfVat.add(item.getVat());
         });
-
-
         BigDecimal brutto = valueOfAmount.add(valueOfVat);
         return brutto.toString();
     }

@@ -8,38 +8,13 @@ import javafx.stage.Stage;
 import pl.sda.model.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
-
-
-
-
-  /*      EntityManagerFactory emf = Persistence
-                .createEntityManagerFactory("JPA");
-        EntityManager entityManager = emf.createEntityManager();
-
-        entityManager.getTransaction().begin();
-
-
-
-
-        entityManager.getTransaction().commit();
-
-
-        entityManager.close();
-        emf.close();
-
-
-       */
     }
 
     private static void showItemList(EntityManager entityManager) {
@@ -79,7 +54,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setScene(new Scene(root));
-        primaryStage.setTitle("Księgowość");
+        primaryStage.setTitle("Zamówienia");
         primaryStage.show();
     }
 }

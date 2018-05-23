@@ -70,11 +70,11 @@ public class Controller {
 
     private String showAmount() {
 
-        yourItemList.getItems().forEach(item ->
-                valueOfAmount =valueOfAmount.add(item.getPrice()));
+        yourItemList.getItems().forEach(item -> {
+                valueOfAmount = valueOfAmount.add(item.getPrice());
+                valueOfVat = valueOfVat.add(item.getVat());
+        });
 
-        yourItemList.getItems().forEach(item ->
-                valueOfVat = valueOfVat.add(item.getVat()));
 
         BigDecimal brutto = valueOfAmount.add(valueOfVat);
         return brutto.toString();

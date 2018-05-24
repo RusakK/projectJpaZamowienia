@@ -43,14 +43,18 @@
             <Label prefHeight="23.0" prefWidth="69.0" text="Twoj dane" />
             <HBox prefHeight="69.0" prefWidth="351.0">
                <children>
-                  <CheckBox mnemonicParsing="false" prefHeight="21.0" prefWidth="127.0" text="Osoba fizyczna" />
-                  <CheckBox mnemonicParsing="false" text="Firma" />
+                  <Group>
+                     <children>
+                        <CheckBox fx:id="checkboxPerson" mnemonicParsing="false" prefHeight="79.0" prefWidth="334.0" text="Osoba fizyczna" />
+                        <CheckBox fx:id="checkboxCompany" mnemonicParsing="false" text="Firma" />
+                     </children>
+                  </Group>
                </children>
             </HBox>
-            <TextField prefHeight="64.0" prefWidth="351.0" text="imie / nazwa firmy" />
-            <TextField prefHeight="68.0" prefWidth="351.0" text="nazwisko / rodzaj firmy" />
-            <TextField prefHeight="69.0" prefWidth="351.0" text="Adres" />
-            <TextField prefHeight="76.0" prefWidth="351.0" text="Pesel / NIP" />
+            <TextField fx:id="labelName" prefHeight="64.0" prefWidth="351.0" text="imie / nazwa firmy" />
+            <TextField fx:id="labelSurnameOrKindOfCompany" prefHeight="68.0" prefWidth="351.0" text="nazwisko / rodzaj firmy" />
+            <TextField fx:id="labelAddress" prefHeight="69.0" prefWidth="351.0" text="Adres" />
+            <TextField fx:id="labelPeselNIP" prefHeight="76.0" prefWidth="351.0" text="Pesel / NIP" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" text="Zapisz dane" />
          </children>
       </VBox>

@@ -3,30 +3,40 @@ package pl.sda.controllers;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import pl.sda.model.Item;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
+
 
 public class Controller {
 
     @FXML
     private ListView<Item> itemList;
-
     @FXML
     private Button addOrderButton;
-
     @FXML
     private ListView<Item> yourItemList;
-
     @FXML
     private Label amount;
+    @FXML
+    private CheckBox checkboxPerson;
+    @FXML
+    private CheckBox checkboxCompany;
+    @FXML
+    private TextField labelName;
+    @FXML
+    private TextField labelSurnameOrKindOfCompany;
+    @FXML
+    private TextField labelAddress;
+    @FXML
+    private TextField labelPeselNIP;
+
+
+
 
     private BigDecimal valueOfAmount = BigDecimal.valueOf(0.00);
     private BigDecimal valueOfVat = BigDecimal.valueOf(0.00);
@@ -38,15 +48,32 @@ public class Controller {
 
         entityManager.getTransaction().begin();
 
+            itemList.getItems().addAll(showItemList(entityManager));
+            itemList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+            addOrderButton.setOnAction(event -> {
+                    addItemsToOrder();
+                    addingPricesWithVat();
+                });
+
+            checkboxPerson.selectedProperty().addListener((observable, oldValue, newValue) ->
+                {if(checkboxPerson.isSelected()){
+                    checkboxCompany.setSelected(false);
+                    labelName.setText("Imie");
+                    labelSurnameOrKindOfCompany.setText("Nazwisko");
+                    labelAddress.setText("ulica, nr bud/ lok, miasto");
+                    labelPeselNIP.setText("PESEL");
+                }});
+            checkboxCompany.selectedProperty().addListener((observable, oldValue, newValue) ->
+                {if(checkboxCompany.isSelected()){
+                    checkboxPerson.setSelected(false);
+                    labelName.setText("Nazwa firmy");
+                    labelSurnameOrKindOfCompany.setText("Rodzaj firmay, np. Sp.z o.o., IDG, S.A., S.C");
+                    labelAddress.setText("ulica, nr bud/ lok, miasto");
+                    labelPeselNIP.setText("NIP");
+                }});
 
 
-        itemList.getItems().addAll(showItemList(entityManager));
-        itemList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        addOrderButton.setOnAction(event -> {
-                addItemsToOrder();
-                addingPricesWithVat();
-            });
 
 
         entityManager.getTransaction().commit();

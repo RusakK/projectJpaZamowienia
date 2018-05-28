@@ -17,7 +17,16 @@ public class Main extends Application {
         launch(args);
     }
 
-    private static void showItemList(EntityManager entityManager) {
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.setTitle("Zamówienia");
+        primaryStage.show();
+    }
+
+
+
+    /*private static void showItemList(EntityManager entityManager) {
         List<Item> itemList = new ArrayList<Item>();
         for (int i = 0; i < 3; i++) {
             Item item = entityManager.find(Item.class, i);
@@ -49,12 +58,6 @@ public class Main extends Application {
         item1.setVat(BigDecimal.valueOf(46));
         entityManager.persist(item1);
 
-    }
+    }*/
 
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
-        primaryStage.setScene(new Scene(root));
-        primaryStage.setTitle("Zamówienia");
-        primaryStage.show();
-    }
 }

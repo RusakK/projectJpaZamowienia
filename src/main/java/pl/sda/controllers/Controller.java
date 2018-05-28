@@ -3,7 +3,11 @@ package pl.sda.controllers;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import pl.sda.model.Company;
+import pl.sda.model.Customer;
 import pl.sda.model.Item;
+import pl.sda.model.Person;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -34,12 +38,17 @@ public class Controller {
     private TextField labelAddress;
     @FXML
     private TextField labelPeselNIP;
+    @FXML
+    private Button buttonSave;
 
 
 
 
     private BigDecimal valueOfAmount = BigDecimal.valueOf(0.00);
     private BigDecimal valueOfVat = BigDecimal.valueOf(0.00);
+
+
+
 
     public  void initialize(){
         EntityManagerFactory emf = Persistence
@@ -54,6 +63,7 @@ public class Controller {
             addOrderButton.setOnAction(event -> {
                     addItemsToOrder();
                     addingPricesWithVat();
+
                 });
 
             checkboxPerson.selectedProperty().addListener((observable, oldValue, newValue) ->
@@ -73,15 +83,44 @@ public class Controller {
                     labelPeselNIP.setText("NIP");
                 }});
 
+// tu mam problem z zapisem do bazy -
+            buttonSave.setOnAction(event -> {
 
+                if(checkboxPerson.isSelected()){
+                   savePerson();
+                }
+                else if(checkboxCompany.isSelected()){
+                    saveCompany();
+                }
+
+            });
+
+            entityManager.persist(savePerson());
 
 
         entityManager.getTransaction().commit();
-
         entityManager.close();
         emf.close();
 
 
+    }
+
+    private Company saveCompany() {
+        Company company = new Company();
+        company.setName(labelName.getText());
+        company.setCompanyType(labelSurnameOrKindOfCompany.getText());
+        company.setNip(labelPeselNIP.getText());
+        company.setAddress(labelAddress.getText());
+        return company;
+    }
+
+    private Person savePerson() {
+        Person person = new Person();
+        person.setFirstName(labelName.getText());
+        person.setLastName(labelSurnameOrKindOfCompany.getText());
+        person.setPesel(labelPeselNIP.getText());
+        person.setAddress(labelAddress.getText());
+        return person;
     }
 
     private void addingPricesWithVat() {

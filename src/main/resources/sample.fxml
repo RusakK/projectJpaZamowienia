@@ -55,7 +55,7 @@
             <TextField fx:id="labelSurnameOrKindOfCompany" prefHeight="68.0" prefWidth="351.0" text="nazwisko / rodzaj firmy" />
             <TextField fx:id="labelAddress" prefHeight="69.0" prefWidth="351.0" text="Adres" />
             <TextField fx:id="labelPeselNIP" prefHeight="76.0" prefWidth="351.0" text="Pesel / NIP" />
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" text="Zapisz dane" />
+            <Button fx:id="buttonSave" mnemonicParsing="false" prefHeight="35.0" prefWidth="99.0" text="Zapisz dane" />
          </children>
       </VBox>
    </right>
